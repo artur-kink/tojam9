@@ -19,6 +19,23 @@ bool UDozerGameViewportClient::InputKey(FViewport* Viewport,
 	bool bGamepad){
 
 	Super::InputKey(Viewport, ControllerId, Key, Event, AmountDepressed, bGamepad);
-	return false;
+
+	if (ControllerId == 0){
+
+		if (Key.GetDisplayName().ToString().Equals(TEXT("Up"))){
+			Super::InputKey(Viewport, 1, FKey("W"), Event, AmountDepressed, bGamepad);
+		}
+		else if (Key.GetDisplayName().ToString().Equals(TEXT("Down"))){
+			Super::InputKey(Viewport, 1, FKey("S"), Event, AmountDepressed, bGamepad);
+		}
+		else if (Key.GetDisplayName().ToString().Equals(TEXT("Left"))){
+			Super::InputKey(Viewport, 1, FKey("A"), Event, AmountDepressed, bGamepad);
+		}
+		else if (Key.GetDisplayName().ToString().Equals(TEXT("Right"))){
+			Super::InputKey(Viewport, 1, FKey("D"), Event, AmountDepressed, bGamepad);
+		}
+	}
+
+	return true;
 }
 

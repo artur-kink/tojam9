@@ -17,7 +17,7 @@ void ADozerGame::BeginPlay(){
 		FString Error1;
 
 		//Spawn second player, first player spawned automatically.
-		ULocalPlayer* newPlayer = GEngine->GameViewport->CreatePlayer(0, Error1, true);
+		ULocalPlayer* newPlayer = GEngine->GameViewport->CreatePlayer(1, Error1, true);
 		if (!newPlayer){
 			GEngine->AddOnScreenDebugMessage(-1, 20.0f, FColor::Red, Error1);
 		}
@@ -26,12 +26,14 @@ void ADozerGame::BeginPlay(){
 			newPlayer->PlayerController->StartSpot = FindPlayerStart(NULL, "P2");
 
 			//Move pawn to start position.
-			newPlayer->PlayerController->GetPawn()->SetActorLocation(
-				newPlayer->PlayerController->StartSpot->GetActorLocation(), false);
+			if (FindPlayerStart(NULL, "P2")){
+				newPlayer->PlayerController->GetPawn()->SetActorLocation(
+					newPlayer->PlayerController->StartSpot->GetActorLocation(), false);
 
-			newPlayer->PlayerController->InitInputSystem();
-			newPlayer->PlayerController->InputComponent->Activate();
-			newPlayer->PlayerController->bBlockInput = false;
+				newPlayer->PlayerController->InitInputSystem();
+				newPlayer->PlayerController->InputComponent->Activate();
+				newPlayer->PlayerController->bBlockInput = false;
+			}
 		}
 	}
 }
