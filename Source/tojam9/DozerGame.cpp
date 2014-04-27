@@ -13,7 +13,7 @@ ADozerGame::ADozerGame(const class FPostConstructInitializeProperties& PCIP)
 void ADozerGame::BeginPlay(){
 	Super::BeginPlay();
 
-	if (GEngine){
+	if (GEngine && GEngine->GetNumGamePlayers(GEngine->GameViewport) == 1){
 		FString Error1;
 
 		//Spawn second player, first player spawned automatically.
